@@ -38,7 +38,9 @@
         ],
 
     ];
+
     $isParkingAvailable = $_GET['parking-opt'] ?? 'off';
+    $minVote = $_GET['vote'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +60,23 @@
         <h1 class="pb-3">PHP Hotels</h1>
 
         <form action="index.php" method="get" class="pb-3 d-flex flex-row align-items-center gap-2">
+
             <input type="checkbox" name="parking-opt" class="form-check-input" <?php echo $isParkingAvailable == 'on' ?>
             <label>Parking</label>
+
+            <select name="vote">
+                <option value="" disabled selected>Choose vote</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
             <button class="btn btn-dark" type="submit">Submit</button>
+
         </form>
+
         
         <table class="table table-striped table-bordered">
     
@@ -91,7 +106,7 @@
                 <?php 
                     foreach($hotels as $hotel) {
 
-                        if ($isParkingAvailable == 'off' || ($isParkingAvailable == 'on' && $hotel['parking'] == 'Present')) {
+                        if (($isParkingAvailable == 'off' || ($isParkingAvailable == 'on' && $hotel['parking'] == 'Present')) && $hotel["vote"] >= $minVote) {
                 ?>
 
                         <tr>
