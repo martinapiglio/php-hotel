@@ -47,13 +47,88 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>PHP Hotel</title>
 </head>
 <body>
 
-    <h1>PHP Hotels</h1>
+    <div class="container py-3">
 
-    <?php 
+        <h1 class="pb-3">PHP Hotels</h1>
+        
+        <table class="table table-striped table-bordered">
+    
+              <thead>
+                    <tr>
+                        <?php 
+                            foreach($hotels[0] as $key => $hotelInformation) {
+                        ?>
+                            <th scope="col" class="text-capitalize"> 
+                                
+                                <?php 
+                                    if ($key == 'distance_to_center') {
+                                        echo 'distance to center';
+                                    } else {
+                                        echo $key; 
+                                    }
+                                ?> 
+                            </th>
+                        <?php
+                            }
+                        ?>
+                    </tr>
+            </thead>
+    
+            <tbody>
+    
+                <?php 
+                    foreach($hotels as $hotel) {
+                ?>
+    
+                <tr>
+                    <?php 
+                        foreach($hotel as $key => $hotelInformation) {
+                    ?>
+    
+                        <td> 
+                            <?php 
+
+                                if ($key == 'parking') {
+    
+                                    if ($hotelInformation == true) {
+                                        echo 'Present';
+                                    } else {
+                                        echo 'Not present';
+                                    }
+    
+                                } else if ($key == 'distance_to_center') {
+                                    echo $hotelInformation . ' km';
+                                }
+                                 else {
+                                     echo $hotelInformation;
+                                } 
+                            ?>
+
+                        </td>
+    
+                    <?php
+                    }
+                    ?>
+                </tr>
+    
+                <?php
+                }
+    
+                ?>
+            </tbody>
+    
+        </table>
+
+    </div>
+
+    <!-- printed hotel information without style -->
+    <!-- <?php 
     
         foreach($hotels as $hotel) {
 
@@ -68,7 +143,11 @@
             echo "</ul>";
         }
 
-    ?>
+    ?> -->
+    <!-- //-->
     
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
 </body>
 </html>
