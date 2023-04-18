@@ -38,7 +38,7 @@
         ],
 
     ];
-
+    $isParkingAvailable = $_GET['parking-opt'] ?? 'off';
 ?>
 
 <!DOCTYPE html>
@@ -56,10 +56,16 @@
     <div class="container py-3">
 
         <h1 class="pb-3">PHP Hotels</h1>
+
+        <form action="index.php" method="get" class="pb-3 d-flex flex-row align-items-center gap-2">
+            <input type="checkbox" name="parking-opt" class="form-check-input" <?php echo $isParkingAvailable == 'on' ?>
+            <label>Parking</label>
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
         
         <table class="table table-striped table-bordered">
     
-              <thead>
+              <thead class="table-dark">
                     <tr>
                         <?php 
                             foreach($hotels[0] as $key => $hotelInformation) {
@@ -84,42 +90,44 @@
     
                 <?php 
                     foreach($hotels as $hotel) {
+
+                        if ($isParkingAvailable == 'off' || ($isParkingAvailable == 'on' && $hotel['parking'] == 'Present')) {
                 ?>
-    
-                <tr>
-                    <?php 
-                        foreach($hotel as $key => $hotelInformation) {
-                    ?>
-    
-                        <td> 
+
+                        <tr>
                             <?php 
-
-                                if ($key == 'parking') {
-    
-                                    if ($hotelInformation == true) {
-                                        echo 'Present';
-                                    } else {
-                                        echo 'Not present';
-                                    }
-    
-                                } else if ($key == 'distance_to_center') {
-                                    echo $hotelInformation . ' km';
-                                }
-                                 else {
-                                     echo $hotelInformation;
-                                } 
+                                foreach($hotel as $key => $hotelInformation) {
                             ?>
+            
+                                <td> 
+                                    <?php 
 
-                        </td>
-    
-                    <?php
-                    }
-                    ?>
-                </tr>
+                                        if ($key == 'parking') {
+            
+                                            if ($hotelInformation == true) {
+                                                echo 'Present';
+                                            } else {
+                                                echo 'Not present';
+                                            }
+            
+                                        } else if ($key == 'distance_to_center') {
+                                            echo $hotelInformation . ' km';
+                                        }
+                                        else {
+                                            echo $hotelInformation;
+                                        } 
+                                    ?>
+
+                                </td>
+            
+                            <?php
+                            }
+                            ?>
+                        </tr>
     
                 <?php
-                }
-    
+                        }
+                    }
                 ?>
             </tbody>
     
