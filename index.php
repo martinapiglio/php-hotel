@@ -40,6 +40,7 @@
     ];
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +50,25 @@
     <title>PHP Hotel</title>
 </head>
 <body>
+
+    <h1>PHP Hotels</h1>
+
+    <?php 
+    
+        foreach($hotels as $hotel) {
+
+            echo "<ul>";
+
+            foreach($hotel as $key => $info){
+
+                echo "<li><strong>{$key}</strong>: {$info}</li>";
+
+            }
+
+            echo "</ul>";
+        }
+
+    ?>
     
 </body>
 </html>
